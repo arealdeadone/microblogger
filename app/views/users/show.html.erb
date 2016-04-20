@@ -5,6 +5,14 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        <% if current_user.admin? %>
+            <h2>
+              <%= @user.email %>
+            </h2>
+            <h2>
+              <%= time_ago_in_words(@user.created_at) %>
+            </h2>
+        <% end %>
       </h1>
     </section>
     <section class="stats">
@@ -16,7 +24,8 @@
               <%= link_to "Log Out", logout_path, method: :delete %>&nbsp;|
               <%= link_to "Settings", edit_user_path(current_user) %>&nbsp;|
           <%end%>
-          <%= link_to "Back", root_path %>&nbsp;
+          <%= link_to "Back", users_url %>
+          &nbsp;
       <% end %>
     </section>
   </aside>

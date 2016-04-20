@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem "ImageResize"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -47,11 +48,17 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'faker'
-#group :production do
- # gem 'pg',             '0.17.1'
- # gem 'rails_12factor', '0.0.2'
- # gem 'puma',           '3.1.0'
-#end
-
+group :production do
+ gem 'pg'
+ gem 'rails_12factor'
+ gem 'puma'
+end
+group :development do
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+end
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'

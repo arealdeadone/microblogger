@@ -17,9 +17,13 @@ class UsersController < ApplicationController
 
   def create
     @users = User.new(user_params)
+    @users.update_attributes(activated: true, activated_at: Time.zone.now)
     if @users.save
-      @users.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      # @users.send_activation_email
+      default_follow = User.find(1)
+      default_follow.follow(@users)
+      @users.follow(default_follow)
+      flash[:success] = "You can now login."
       redirect_to login_path
     else
       render 'new'
